@@ -41,7 +41,7 @@
                     </ul>
                 </li>
                 <li class="login-link">
-                    <a href="login.html">Login / Signup</a>
+                    <a href="{{route('getLogin')}}">Đăng nhập</a>
                 </li>
             </ul>
         </div>
