@@ -3744,7 +3744,7 @@ var render = function render() {
         return _vm.login();
       }
     }
-  }, [_vm._v("Đăng nhập")])]), _vm._v(" "), _vm._m(1)])])]);
+  }, [_vm._v("Đăng nhập")])])])])]);
 };
 
 var staticRenderFns = [function () {
@@ -3760,17 +3760,6 @@ var staticRenderFns = [function () {
       alt: "Logo"
     }
   })]);
-}, function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("div", {
-    staticClass: "dont-have"
-  }, [_vm._v("Bạn chưa có tài khoản? "), _c("a", {
-    attrs: {
-      href: "/register"
-    }
-  }, [_vm._v("Đăng ký")])]);
 }];
 render._withStripped = true;
 

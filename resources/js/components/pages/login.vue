@@ -20,7 +20,7 @@
                 <div class="d-grid">
                     <button class="btn btn-primary" @click.passive="login()">Đăng nhập</button>
                 </div>
-                <div class="dont-have">Bạn chưa có tài khoản? <a href="/register">Đăng ký</a></div>
+<!--                <div class="dont-have">Bạn chưa có tài khoản? <a href="/register">Đăng ký</a></div>-->
             </div>
         </div>
     </div>

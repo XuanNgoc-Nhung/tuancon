@@ -56,4 +56,8 @@ class MyLoginController extends Controller
             'password' => Hash::make($data['password'])
         ]);
     }
+    public function logOut(){
+        Auth::logout();
+        return redirect('/');
+    }
 }
