@@ -13,7 +13,7 @@ var ipClient = '';
 
     function checkIpClient() {
         console.log("Tiến hành check ip client")
-        let url_check_ip = 'http://127.0.0.1:8000/check-ip-config?ip=' + ipClient
+        let url_check_ip = 'https://tuancon.com/check-ip-config?ip=' + ipClient
         $.getJSON(url_check_ip, function (resCheck) {
             console.log(JSON.stringify(resCheck));
             if (resCheck.accept == true) {

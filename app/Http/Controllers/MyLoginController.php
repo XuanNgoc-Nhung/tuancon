@@ -31,7 +31,7 @@ class MyLoginController extends Controller
     }
     public function postLogin(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('phone', 'password');
         if (Auth::attempt($credentials)) {
             $res = [
                 'rc' => 0,

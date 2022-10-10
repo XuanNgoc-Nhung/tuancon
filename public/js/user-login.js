@@ -3558,8 +3558,8 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(element_ui__WEBPACK_IMPORTED_MODU
         text: 'Loading...'
       },
       infoLogin: {
-        userName: 'tuancon@gmail.com',
-        password: 'tuancon123'
+        phone: '',
+        password: ''
       }
     };
   },
@@ -3570,7 +3570,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(element_ui__WEBPACK_IMPORTED_MODU
     login: function login() {
       var _this = this;
 
-      if (!this.infoLogin.userName) {
+      if (!this.infoLogin.phone) {
         this.thongBao('error', 'Vui lòng bổ sung tên tài khoản.');
         return;
       }
@@ -3581,7 +3581,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(element_ui__WEBPACK_IMPORTED_MODU
       }
 
       var params = {
-        'email': this.infoLogin.userName,
+        'phone': this.infoLogin.phone,
         'password': this.infoLogin.passWord
       };
       console.log(params);
@@ -3680,7 +3680,7 @@ var render = function render() {
     staticClass: "loginbox"
   }, [_vm._m(0), _vm._v(" "), _c("h3", [_vm._v("Đăng nhập thành viên")]), _vm._v(" "), _c("p", {
     staticClass: "account-subtitle"
-  }, [_vm._v("Đăng nhập với email của bạn")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Đăng nhập với sđt của bạn")]), _vm._v(" "), _c("div", {
     staticClass: "form-group"
   }, [_c("label", {
     staticClass: "focus-label"
@@ -3688,8 +3688,8 @@ var render = function render() {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.infoLogin.userName,
-      expression: "infoLogin.userName"
+      value: _vm.infoLogin.phone,
+      expression: "infoLogin.phone"
     }],
     staticClass: "form-control",
     attrs: {
@@ -3699,13 +3699,13 @@ var render = function render() {
       placeholder: "Nhập email của bạn"
     },
     domProps: {
-      value: _vm.infoLogin.userName
+      value: _vm.infoLogin.phone
     },
     on: {
       input: function input($event) {
         if ($event.target.composing) return;
 
-        _vm.$set(_vm.infoLogin, "userName", $event.target.value);
+        _vm.$set(_vm.infoLogin, "phone", $event.target.value);
       }
     }
   })]), _vm._v(" "), _c("div", {
@@ -3756,7 +3756,7 @@ var staticRenderFns = [function () {
   }, [_c("img", {
     staticClass: "img-fluid",
     attrs: {
-      src: "assets/img/logo.png",
+      src: "user/assets/img/logo.png",
       alt: "Logo"
     }
   })]);

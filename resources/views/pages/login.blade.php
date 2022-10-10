@@ -23,6 +23,9 @@
         .login-wrapper .loginbox label{
             margin-bottom: 0;
         }
+        .login-bg{
+            background: url("user/assets/img/anhnen.jpg");
+        }
     </style>
 
 </head>
@@ -46,8 +49,8 @@
     </div>
     <div class="row">
         <!-- Login Banner -->
-        <div class="col-md-6 login-bg">
-            <div class="login-banner"></div>
+        <div class="col-md-6 text-center">
+            <img src="user/assets/img/anhnen.jpg" alt="">
         </div>
         <!-- /Login Banner -->
         <div class="col-md-6 login-wrap-bg">

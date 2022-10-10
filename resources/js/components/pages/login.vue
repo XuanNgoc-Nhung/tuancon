@@ -4,14 +4,14 @@
         <div class="login-wrapper">
             <div class="loginbox">
                 <div class="img-logo">
-                    <img src="assets/img/logo.png" class="img-fluid" alt="Logo">
+                    <img src="user/assets/img/logo.png" class="img-fluid" alt="Logo">
                 </div>
                 <h3>Đăng nhập thành viên</h3>
-                <p class="account-subtitle">Đăng nhập với email của bạn</p>
+                <p class="account-subtitle">Đăng nhập với sđt của bạn</p>
 
                 <div class="form-group">
                     <label class="focus-label">Email</label>
-                    <input type="text" v-model="infoLogin.userName" required name="email" placeholder="Nhập email của bạn" class="form-control ">
+                    <input type="text" v-model="infoLogin.phone" required name="email" placeholder="Nhập email của bạn" class="form-control ">
                 </div>
                 <div class="form-group">
                     <label class="focus-label">Mật khẩu</label>
@@ -42,8 +42,8 @@ export default {
                 text: 'Loading...'
             },
             infoLogin: {
-                userName: 'tuancon@gmail.com',
-                password: 'tuancon123',
+                phone: '',
+                password: '',
             }
         }
     },
@@ -52,7 +52,7 @@ export default {
     },
     methods: {
         login() {
-            if(!this.infoLogin.userName){
+            if(!this.infoLogin.phone){
                 this.thongBao('error','Vui lòng bổ sung tên tài khoản.')
                 return;
             }
@@ -61,7 +61,7 @@ export default {
                 return;
             }
             let params = {
-                'email': this.infoLogin.userName,
+                'phone': this.infoLogin.phone,
                 'password': this.infoLogin.passWord,
             }
             console.log(params)

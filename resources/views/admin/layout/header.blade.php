@@ -3,7 +3,7 @@
     <!-- Logo -->
     <div class="header-left">
         <a href="index.html" class="logo">
-            <img src="assets/img/logo.png" alt="Logo">
+            <img src="user/assets/img/logo.png" alt="Logo">
         </a>
         <a href="index.html" class="logo logo-small">
             <img src="assets/img/logo-small.png" alt="Logo" width="30" height="30">
@@ -145,11 +145,10 @@
                         <p class="text-muted mb-0">Admin</p>
                     </div>
                 </div>
-                <a class="dropdown-item" href="profile.html"><i class="feather-user me-1"></i> My Profile</a>
-                <a class="dropdown-item" href="profile.html"><i class="feather-edit me-1"></i> Edit Profile</a>
-                <a class="dropdown-item" href="account-settings.html"><i class="feather-sliders me-1"></i> Account Settings</a>
+                <a class="dropdown-item" href="profile.html"><i class="feather-user me-1"></i> Thông tin</a>
+                <a class="dropdown-item" href="account-settings.html"><i class="feather-sliders me-1"></i> Cài đặt</a>
                 <hr class="my-0 ms-2 me-2">
-                <a class="dropdown-item" href="{{route('logOut')}}"><i class="feather-log-out me-1"></i> Logout</a>
+                <a class="dropdown-item" href="{{route('logOut')}}"><i class="feather-log-out me-1"></i> Đăng xuất</a>
             </div>
         </li>
         <!-- /User Menu -->
