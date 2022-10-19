@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <title>Đăng ký thành viên</title>
+    <title>Đăng nhập thành viên</title>
 
     <base href="{{asset('')}}">
     <!-- Favicon -->
@@ -22,9 +22,6 @@
     <style>
         .login-wrapper .loginbox label{
             margin-bottom: 0;
-        }
-        .login-bg{
-            background: url("user/assets/img/anhnen.jpg");
         }
     </style>
 

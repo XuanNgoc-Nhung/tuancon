@@ -56,7 +56,7 @@
                 </div>
             </li>
             <li class="nav-item">
-{{--                <a class=" btn btn-sm btn-primary mr-1" href="{{route('getRegister')}}">Đăng ký </a>--}}
+                <a class=" btn btn-sm btn-primary mr-1" href="{{route('getRegister')}}">Đăng ký </a>
                 <a class=" btn btn-sm btn-success" href="{{route('getLogin')}}">Đăng nhập </a>
             </li>
         </ul>

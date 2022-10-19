@@ -18,7 +18,7 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th>STT</th>
-                                    <th>Thiết bị</th>
+                                    <th>Người dùng</th>
                                     <th>Địa chỉ ip</th>
                                     <th>Trạng thái</th>
                                     <th>Truy cập gần nhất</th>
@@ -63,8 +63,8 @@
                     <el-row :gutter="24">
                         <el-col :span="24">
                             <el-form-item prop="name">
-                                <label>Tên thiết bị</label>
-                                <el-input placeholder="Nhập địa tên thiết bị" v-model="dataAdd.name"></el-input>
+                                <label>Tên người dùng</label>
+                                <el-input placeholder="Nhập tên người dùng" v-model="dataAdd.name"></el-input>
                             </el-form-item>
                         </el-col>
                         <el-col :span="24">

@@ -3678,13 +3678,11 @@ var render = function render() {
     staticClass: "login-wrapper"
   }, [_c("div", {
     staticClass: "loginbox"
-  }, [_vm._m(0), _vm._v(" "), _c("h3", [_vm._v("Đăng nhập thành viên")]), _vm._v(" "), _c("p", {
-    staticClass: "account-subtitle"
-  }, [_vm._v("Đăng nhập với sđt của bạn")]), _vm._v(" "), _c("div", {
+  }, [_vm._m(0), _vm._v(" "), _c("h3", [_vm._v("Đăng nhập thành viên")]), _vm._v(" "), _c("div", {
     staticClass: "form-group"
   }, [_c("label", {
     staticClass: "focus-label"
-  }, [_vm._v("Email")]), _vm._v(" "), _c("input", {
+  }, [_vm._v("Tài khoản")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -3702,6 +3700,10 @@ var render = function render() {
       value: _vm.infoLogin.phone
     },
     on: {
+      keyup: function keyup($event) {
+        if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
+        return _vm.login();
+      },
       input: function input($event) {
         if ($event.target.composing) return;
 
@@ -3729,6 +3731,10 @@ var render = function render() {
       value: _vm.infoLogin.passWord
     },
     on: {
+      keyup: function keyup($event) {
+        if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
+        return _vm.login();
+      },
       input: function input($event) {
         if ($event.target.composing) return;
 
@@ -3744,7 +3750,7 @@ var render = function render() {
         return _vm.login();
       }
     }
-  }, [_vm._v("Đăng nhập")])])])])]);
+  }, [_vm._v("Đăng nhập")])]), _vm._v(" "), _vm._m(1)])])]);
 };
 
 var staticRenderFns = [function () {
@@ -3760,6 +3766,17 @@ var staticRenderFns = [function () {
       alt: "Logo"
     }
   })]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", {
+    staticClass: "dont-have text-left"
+  }, [_vm._v("Bạn chưa có tài khoản? "), _c("a", {
+    attrs: {
+      href: "/register"
+    }
+  }, [_vm._v("Đăng ký")])]);
 }];
 render._withStripped = true;
 

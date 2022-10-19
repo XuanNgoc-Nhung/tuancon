@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use App\IpConfig;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
@@ -15,8 +17,27 @@ class AdminController extends Controller
         $data = IpConfig::all();
         return view('admin.ip-config',compact('data'));
     }
+    public function userManagement(){
+        return view('admin.user-management');
+    }
+
     public function getListIp(Request $request){
         $data = IpConfig::skip(0)->take(10)->get();
+        if(count($data)){
+            $res = [
+                'rc'=>'0',
+                'data'=>$data
+            ];
+        }else{
+            $res = [
+                'rc'=>'1',
+                'rd'=>'Không tìm thấy bản ghi nào'
+            ];
+        }
+        return json_encode($res);
+    }
+    public function getListUser(Request $request){
+        $data = User::skip(0)->take(10)->get();
         if(count($data)){
             $res = [
                 'rc'=>'0',
@@ -109,5 +130,35 @@ class AdminController extends Controller
             ];
         }
         return $res;
+    }
+    public function myProfile(){
+        $ipHost = IpConfig::where('user',Auth::user()->id)->first();
+        return view('admin.profile',compact('ipHost'));
+    }
+    public function updateMyIp(Request $request){
+        Log::info("cập nhật địa chỉ ip");
+        $ipHost = IpConfig::where('user',$request->get('user'))->first();
+        if($ipHost){
+            $ipHost ->ip = $request->get('ip');
+            $ipHost->name = Auth::user()->phone;
+            $ipHost->save();
+            $res = [
+                'rc'=>'0',
+                'rd'=>'Cập cập nhật thành công.'
+            ];
+        }
+        else{
+            $config = new IpConfig;
+            $config->ip = $request->get('ip');
+            $config->user = $request->get('user');
+            $config->name = Auth::user()->phone;
+            $config->status = 1;
+            $config->save();
+            $res = [
+                'rc'=>'0',
+                'rd'=>'Thêm mới địa chỉ nhật thành công.'
+            ];
+        }
+        return json_encode($res);
     }
 }

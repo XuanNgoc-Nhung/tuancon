@@ -141,11 +141,11 @@
                         <img src="assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle">
                     </div>
                     <div class="user-text">
-                        <h6>{{Auth::user()->email}}</h6>
-                        <p class="text-muted mb-0">Admin</p>
+                        <h6>{{Auth::user()->name}}</h6>
+                        <p class="text-muted mb-0">15.000đ</p>
                     </div>
                 </div>
-                <a class="dropdown-item" href="profile.html"><i class="feather-user me-1"></i> Thông tin</a>
+                <a class="dropdown-item" href="{{route('myProfile')}}"><i class="feather-user me-1"></i> Thông tin</a>
                 <a class="dropdown-item" href="account-settings.html"><i class="feather-sliders me-1"></i> Cài đặt</a>
                 <hr class="my-0 ms-2 me-2">
                 <a class="dropdown-item" href="{{route('logOut')}}"><i class="feather-log-out me-1"></i> Đăng xuất</a>

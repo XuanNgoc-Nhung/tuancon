@@ -16,6 +16,7 @@
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/css/custom.css">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
         .login-wrapper .loginbox label{
@@ -46,60 +47,11 @@
     <div class="row">
 
         <!-- Login Banner -->
-        <div class="col-md-6 login-bg">
-            <div class="login-banner"></div>
+        <div class="col-md-6">
+            <img src="user/assets/img/anhnen.jpg" alt="">
         </div>
-        <!-- /Login Banner -->
-
-        <div class="col-md-6 login-wrap-bg">
-
-            <!-- Login -->
-            <div class="login-wrapper">
-                <div class="loginbox">
-                    <div class="img-logo">
-                        <img src="assets/img/logo.png" class="img-fluid" alt="Logo">
-                    </div>
-                    <h3>Đăng ký thành viên</h3>
-                    <p class="account-subtitle">Đăng ký với email của bạn</p>
-
-                    <form method="post" action="{{route('postRegister')}}">
-                        @csrf
-                        <div class="form-group">
-                            <label class="">Họ & tên</label>
-                            <input type="text" required name="name" placeholder="Nhập tên của bạn" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label class="focus-label">Email</label>
-                            <input type="text" required name="email" placeholder="Nhập email của bạn" class="form-control ">
-                        </div>
-                        <div class="form-group">
-                            <label class="focus-label">Mật khẩu</label>
-                            <input type="password" required name="password" class="form-control ">
-                        </div>
-                        <div class="form-group">
-                            <label class="focus-label">Nhập lại mật khẩu</label>
-                            <input type="password" required class="form-control ">
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-12">
-                                    <label class="custom_check mr-2 mb-0"> Tôi chấp nhận với các <b>Điều khoản</b> và
-                                        <b>Chính sách bảo mật</b>.
-                                        <input type="checkbox" name="radio">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-grid">
-                            <button class="btn btn-primary" type="submit">Đăng ký</button>
-                        </div>
-                        <div class="dont-have">Bạn đã có tài khoản? <a href="{{route('getLogin')}}">Đăng nhập</a></div>
-                    </form>
-                </div>
-            </div>
-            <!-- /Login -->
-
+        <div class="col-md-6 login-wrap-bg" id="app">
+            <register></register>
         </div>
 
     </div>
@@ -114,6 +66,7 @@
 
 <!-- Custom JS -->
 <script src="assets/js/script.js"></script>
+<script src="{{asset('js/user-register.js?t='.Carbon\Carbon::now()->timestamp)}}"></script>
 
 </body>
 </html>

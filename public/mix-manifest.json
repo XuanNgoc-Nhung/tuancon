@@ -1,6 +1,9 @@
 {
     "/js/app.js": "/js/app.js",
     "/js/ip-config.js": "/js/ip-config.js",
+    "/js/my-profile.js": "/js/my-profile.js",
     "/js/user-login.js": "/js/user-login.js",
-    "/css/app.css": "/css/app.css"
+    "/css/app.css": "/css/app.css",
+    "/js/user-management.js": "/js/user-management.js",
+    "/js/user-register.js": "/js/user-register.js"
 }

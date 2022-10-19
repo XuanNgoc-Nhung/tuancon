@@ -1,39 +1,55 @@
 var ipClient = '';
 (function () {
     'use strict';
-    console.log("test thử:")
-    $.getJSON('https://api.db-ip.com/v2/free/self', function (data) {
-        console.log(JSON.stringify(data.ipAddress));
-        ipClient = data.ipAddress
-        console.log(ipClient)
-        if (ipClient) {
-            checkIpClient();
-        }
-    });
 
-    function checkIpClient() {
-        console.log("Tiến hành check ip client")
-        let url_check_ip = 'https://tuancon.com/check-ip-config?ip=' + ipClient
-        $.getJSON(url_check_ip, function (resCheck) {
-            console.log(JSON.stringify(resCheck));
-            if (resCheck.accept == true) {
-                console.log("Tiến hành")
-                setUpDataFake();
-            } else {
-                console.log("Chặn")
-                alert('Bạn đang sử dụng mà chưa được cho phép. Vui lòng liên hệ Admin qua Telegram https://t.me/tuancon2112 hoặc truy cập website https://tuancon.com để mua và sử dụng phần mềm.')
+    var bodyTemplate = document.querySelector("body")
+    var loadingImg = document.createElement("img");
+    loadingImg.style.width = '10%';
+    loadingImg.style.position = 'absolute';
+    loadingImg.style.top = '0';
+    loadingImg.style.padding = '45%';
+    loadingImg.style.background = 'white';
+    loadingImg.classList.add("pxn-loading");
+    loadingImg.src = 'https://thumbs.gfycat.com/CautiousImpassionedBoubou-size_restricted.gif';
+    bodyTemplate.appendChild(loadingImg);
+    fetch('https://api.db-ip.com/v2/free/self')
+        .then((response) => response.json())
+        .then((data) => {
+            ipClient = data.ipAddress
+            if (ipClient) {
+                checkIpClient();
             }
         });
+    function checkIpClient() {
+        let url_check_ip = 'https://tuancon.com/check-ip-config?ip=' + ipClient
+        fetch(url_check_ip)
+            .then((response) => response.json())
+            .then((resCheck) => {
+                if (resCheck.accept == true) {
+                    if (document.querySelector(".pxn-loading")) {
+                        document.querySelector(".pxn-loading").remove()
+                    }
+                    setUpDataFake();
+                } else {
+                    alert('Bạn đang sử dụng mà chưa được cho phép. Vui lòng liên hệ Admin qua Telegram https://t.me/tuancon2112 hoặc truy cập website https://tuancon.com để mua và sử dụng phần mềm.')
+                }
+            });
     }
-
     function setUpDataFake() {
+        //code ở đây
         setInterval(() => {
-            let soTien = document.querySelector("#GameMenu > div.icon_inforMoney > span.ng-binding.ng-scope");
-            if (soTien) {
-                soTien.innerHTML = '15.000';
+            var imgChat = document.createElement("img");
+            imgChat.src = "https://tuancon.com/images/games/ku/mes_ku.jpg";
+            imgChat.style.width = "100%";
+            var iframeChat = document.querySelector("#ichatIframe");
+            if (iframeChat) {
+                iframeChat.remove();
             }
-        }, 0)
+            var ganAnhChat = document.querySelector(".Click_UpdateBox");
+            if (ganAnhChat) {
+                ganAnhChat.innerHTML = "";
+                ganAnhChat.appendChild(imgChat);
+            }
+        }, 50)
     }
-
-    // Your code here...
 })();

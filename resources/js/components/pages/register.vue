@@ -1,35 +1,47 @@
 <template>
-    <div v-loading.fullscreen.lock="loading.status" :element-loading-text="loading.text"
-         element-loading-spinner="el-icon-loading" element-loading-background="rgba(0, 0, 0, 0.8)">
         <div class="login-wrapper">
             <div class="loginbox">
                 <div class="img-logo">
                     <img src="user/assets/img/logo.png" class="img-fluid" alt="Logo">
                 </div>
-                <h3>Đăng nhập thành viên</h3>
-                <div class="form-group">
-                    <label class="focus-label">Tài khoản</label>
-                    <input type="text" v-model="infoLogin.phone" v-on:keyup.enter="login()" required name="email" placeholder="Nhập email của bạn" class="form-control ">
-                </div>
-                <div class="form-group">
-                    <label class="focus-label">Mật khẩu</label>
-                    <input type="password" v-model="infoLogin.passWord" v-on:keyup.enter="login()" required name="password" class="form-control ">
-                </div>
-                <div class="d-grid">
-                    <button class="btn btn-primary" @click.passive="login()">Đăng nhập</button>
-                </div>
-                <div class="dont-have text-left">Bạn chưa có tài khoản? <a href="/register">Đăng ký</a></div>
+                <h3>Đăng ký thành viên</h3>
+                    <div class="form-group">
+                        <label class="">Tên đăng nhập</label>
+                        <input type="text" v-model="dataRegister.phone" placeholder="Email hoặc số điện thoại" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="focus-label">Mật khẩu</label>
+                        <input type="password" v-model="dataRegister.password"class="form-control ">
+                    </div>
+                    <div class="form-group">
+                        <label class="focus-label">Nhập lại mật khẩu</label>
+                        <input type="password" v-model="dataRegister.rePassword" class="form-control ">
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-12">
+                                <label class="custom_check mr-2 mb-0"> Tôi chấp nhận với các <b>Điều khoản</b> và
+                                    <b>Chính sách bảo mật</b>.
+                                    <input type="checkbox" v-model="dataRegister.check" name="radio">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-grid">
+                        <button class="btn btn-primary" @click.prevent="checkRegister()" >Đăng ký</button>
+                    </div>
+                    <div class="dont-have text-left">Bạn đã có tài khoản? <a href="/login">Đăng nhập</a></div>
             </div>
         </div>
-    </div>
 </template>
+
 <script>
 import rest_api from "../../api/rest_api";
 import Vue from 'vue';
 import ElementUI from 'element-ui';
 import {Icon} from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-
 Vue.use(ElementUI);
 Vue.use(Icon);
 export default {
@@ -39,9 +51,11 @@ export default {
                 status: false,
                 text: 'Loading...'
             },
-            infoLogin: {
+            dataRegister: {
                 phone: '',
                 password: '',
+                rePassword: '',
+                check: '',
             }
         }
     },
@@ -49,28 +63,37 @@ export default {
         console.log('Mounted Login...')
     },
     methods: {
-        login() {
-            if(!this.infoLogin.phone){
+        checkRegister() {
+            if(!this.dataRegister.phone){
                 this.thongBao('error','Vui lòng bổ sung tên tài khoản.')
                 return;
             }
-            if(!this.infoLogin.passWord){
+            if(!this.dataRegister.password){
                 this.thongBao('error','Vui lòng bổ sung mật khẩu.')
                 return;
             }
+            if(this.dataRegister.password!=this.dataRegister.rePassword){
+                this.thongBao('error','Vui lòng nhập lại đúng mật khẩu.')
+                return;
+            }
+            if(!this.dataRegister.check){
+                this.thongBao('error','Không đồng ý với điều khoản thì đăng ký làm gì?')
+                return;
+            }
             let params = {
-                'phone': this.infoLogin.phone,
-                'password': this.infoLogin.passWord,
+                'phone': this.dataRegister.phone,
+                'password': this.dataRegister.password,
             }
             console.log(params)
-            var url = '/login'
+            var url = '/register'
             this.loading.status = true;
-            this.loading.text = 'Đang đăng nhập...'
+            this.loading.text = 'Đang đăng ký...'
             rest_api.post(url, params).then(
                 response => {
+                    console.log('Đăng ký trả về:')
+                    console.log(response.data)
                     if(response.data.rc==0){
                         this.thongBao('success',response.data.rd)
-                        window.open("admin","_self")
                     }
                     else {
                         this.thongBao('error',response.data.rd)

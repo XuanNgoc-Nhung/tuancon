@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Session;
 use App\User;
 use Hash;
@@ -20,23 +21,43 @@ class MyLoginController extends Controller
 
     public function postRegister(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
-        ]);
         $data = $request->all();
-        $check = $this->create($data);
-        return redirect("dashboard")->withSuccess('Great! You have Successfully loggedin');
+        $user = User::where('phone','=',$data['phone'])->first();
+        if($user!=null){
+            $res = [
+                'rc' => -1,
+                'rd' => 'Tài khoản đã có trên hệ thống',
+            ];
+        }else{
+            User::create([
+                'phone' => $data['phone'],
+                'name' => $data['phone'],
+                'password' => Hash::make($data['password'])
+            ]);
+            $res = [
+                'rc' => 0,
+                'rd' => 'Đăng ký thành công. Vui lòng đợi admin phê duyệt.',
+            ];
+        }
+
+        return json_encode($res);
     }
     public function postLogin(Request $request)
     {
         $credentials = $request->only('phone', 'password');
         if (Auth::attempt($credentials)) {
-            $res = [
-                'rc' => 0,
-                'rd' => 'Đăng nhập thành công',
-            ];
+            Log::info(Auth::user()->status);
+            if(Auth::user()->status==0){
+                $res = [
+                    'rc' => -1,
+                    'rd' => 'Tài khoản của bạn chưa được kích hoạt. Vui lòng liên hệ hotline để được trợ giúp',
+                ];
+            }else{
+                $res = [
+                    'rc' => 0,
+                    'rd' => 'Đăng nhập thành công',
+                ];
+            }
         }
         else{
             $res = [

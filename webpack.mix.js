@@ -13,6 +13,9 @@ const mix = require('laravel-mix');
 
 mix
     .js('resources/js/user-login.js', 'public/js/user-login.js')
+    .js('resources/js/user-register.js', 'public/js/user-register.js')
+    .js('resources/js/my-profile.js', 'public/js/my-profile.js')
+    .js('resources/js/user-management.js', 'public/js/user-management.js')
     .js('resources/js/ip-config.js', 'public/js/ip-config.js')
     .options({
         processCssUrls: false
