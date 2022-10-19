@@ -10,33 +10,33 @@
                     <div class="setting-info profile-info">
                         <h4>Thông tin người dùng</h4>
                         <div class="row mb-2">
-                            <div class="col-md-6">
-                                <label class="">Họ & tên</label>
-                                <input disabled type="text" v-model="info.name" placeholder="Email hoặc số điện thoại"
-                                       class="form-control">
-                            </div>
+<!--                            <div class="col-md-6">-->
+<!--                                <label class="">Họ & tên</label>-->
+<!--                                <input disabled type="text" v-model="info.name" placeholder="Email hoặc số điện thoại"-->
+<!--                                       class="form-control">-->
+<!--                            </div>-->
                             <div class="col-md-6">
                                 <label class="">Tên đăng nhập</label>
-                                <input disabled type="text" v-model="info.phone" placeholder="Email hoặc số điện thoại"
-                                       class="form-control">
+                                <el-input disabled type="text" v-model="info.phone" placeholder="Email hoặc số điện thoại" />
                             </div>
-                            <div class="col-md-6 mt-3">
+                            <div class="col-md-6">
                                 <label class="">Tài khoản</label>
-                                <input disabled type="text" value="15.000đ" placeholder="Email hoặc số điện thoại"
-                                       class="form-control">
+                                <el-input disabled type="text" value="2.000.000đ" placeholder="Email hoặc số điện thoại"
+                                       />
                             </div>
                             <div class="col-md-6 mt-3">
                                 <label class="">Cấp bậc</label>
-                                <input disabled type="text" value="Thành viên Bạc" placeholder="Email hoặc số điện thoại"
-                                       class="form-control">
+                                <el-input disabled type="text" value="Thành viên Bạc" placeholder="Email hoặc số điện thoại"/>
                             </div>
                             <div class="col-md-6 mt-3">
                                 <label class="">Địa chỉ ip cá nhân</label>
                                 <div>
                                     <el-input placeholder="Nhập địa chỉ ip" v-model="ipHost.ip">
                                         <template slot="append">
+                                            <el-tooltip effect="dark" content="Lấy thông tin địa chỉ ip cá nhân" placement="top">
                                             <el-button type="danger" @click.prvent="getMyIp()">
                                                 <i class="el-icon-refresh"></i></el-button>
+                                            </el-tooltip>
                                         </template>
                                     </el-input>
                                 </div>
@@ -49,7 +49,8 @@
             <div class="row mt-auto">
                 <div class="col-md-12">
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary btn-sm" @click.prevent="updateIp()">Lưu lại</button>
+                        <el-button size="mini" type="primary" @click.prevent="updateIp">Lưu lại thông tin</el-button>
+<!--                        <button type="submit" class="btn btn-primary btn-sm" @click.prevent="updateIp()">Lưu lại</button>-->
                     </div>
                 </div>
             </div>
@@ -112,7 +113,7 @@ export default {
             }
             let params = {
                 'ip': this.ipHost.ip,
-                'user': this.info.id
+                'user': this.info.name
             }
             console.log(params)
             var url = '/update-my-ip'
@@ -166,4 +167,7 @@ export default {
 }
 </script>
 <style scoped="scoped">
+.el-input{
+    color: black !important;
+}
 </style>

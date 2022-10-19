@@ -27,7 +27,9 @@ Route::middleware(['checkLogin'])->group(function () {
    Route::post('/get-list-user', 'AdminController@getListUser');
    Route::post('/add-ip', 'AdminController@addIp');
    Route::post('/update-ip', 'AdminController@updateIp');
+   Route::post('/update-status-user', 'AdminController@updateStatusUser');
    Route::post('/delete-ip', 'AdminController@deleteIp');
+   Route::post('/delete-user', 'AdminController@deleteUser');
    Route::post('/update-my-ip', 'AdminController@updateMyIp');
 
 });

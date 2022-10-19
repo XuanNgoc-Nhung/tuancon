@@ -142,7 +142,7 @@
                     </div>
                     <div class="user-text">
                         <h6>{{Auth::user()->name}}</h6>
-                        <p class="text-muted mb-0">15.000đ</p>
+                        <p class="text-muted mb-0">2.000.000đ</p>
                     </div>
                 </div>
                 <a class="dropdown-item" href="{{route('myProfile')}}"><i class="feather-user me-1"></i> Thông tin</a>

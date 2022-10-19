@@ -3582,18 +3582,18 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(element_ui__WEBPACK_IMPORTED_MODU
     this.getIp();
   },
   methods: {
-    confirmDel: function confirmDel(ip) {
+    confirmDel: function confirmDel(name) {
       var _this = this;
 
-      this.$confirm('Xác nhận xoá địa chỉ ip này?', 'Thông báo', {
+      this.$confirm('Xác nhận xoá tài khoản này kèm theo các dữ liệu liên quan?', 'Thông báo', {
         confirmButtonText: 'Đồng ý',
         cancelButtonText: 'Hủy'
       }).then(function (_) {
         var params = {
-          ip: ip
+          userName: name
         };
         console.log(params);
-        var url = '/delete-ip';
+        var url = '/delete-user';
         _this.loading.status = true;
         _this.loading.text = 'Loading...';
         _api_rest_api__WEBPACK_IMPORTED_MODULE_0__["default"].post(url, params).then(function (response) {
@@ -3612,7 +3612,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(element_ui__WEBPACK_IMPORTED_MODU
         })["catch"](function (e) {});
       })["catch"](function (_) {});
     },
-    updateStatus: function updateStatus(ip, status) {
+    updateStatusUser: function updateStatusUser(userName, status) {
       var _this2 = this;
 
       this.$confirm('Xác nhận thay đổi trạng thái ip?', 'Thông báo', {
@@ -3620,11 +3620,11 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(element_ui__WEBPACK_IMPORTED_MODU
         cancelButtonText: 'Hủy'
       }).then(function (_) {
         var params = {
-          ip: ip,
+          userName: userName,
           status: status
         };
         console.log(params);
-        var url = '/update-ip';
+        var url = '/update-status-user';
         _this2.loading.status = true;
         _this2.loading.text = 'Loading...';
         _api_rest_api__WEBPACK_IMPORTED_MODULE_0__["default"].post(url, params).then(function (response) {
@@ -3768,7 +3768,7 @@ var render = function render() {
       on: {
         click: function click($event) {
           $event.preventDefault();
-          return _vm.updateStatus(user.id, 0);
+          return _vm.updateStatusUser(user.phone, 0);
         }
       }
     }, [_vm._v("Chặn\n                                ")]) : _c("el-button", {
@@ -3780,7 +3780,7 @@ var render = function render() {
       on: {
         click: function click($event) {
           $event.preventDefault();
-          return _vm.updateStatus(user.id, 1);
+          return _vm.updateStatusUser(user.phone, 1);
         }
       }
     }, [_vm._v("Duyệt\n                                ")]), _vm._v(" "), _c("el-button", {
@@ -3792,7 +3792,7 @@ var render = function render() {
       on: {
         click: function click($event) {
           $event.preventDefault();
-          return _vm.confirmDel(user.id);
+          return _vm.confirmDel(user.name);
         }
       }
     }, [_vm._v("Xoá\n                                ")])], 1)]);

@@ -78,6 +78,19 @@ class AdminController extends Controller
         return json_encode($res);
 
     }
+    public function updateStatusUser(Request $request){
+        $data = $request->all();
+        $user = User::where('phone',$data['userName'])->first();
+        $ip = IpConfig::where('user', '=', $data['userName'])->delete();
+        $user->status = $data['status'];
+        $user->save();
+        $res = [
+            'rc'=>'0',
+            'rd'=>'Cập nhật trạng thái thành công',
+            'user'=>$user
+        ];
+        return json_encode($res);
+    }
     public function updateIp(Request $request){
         Log::error('Cập nhật ip');
         $ip = $request->ip;
@@ -98,6 +111,16 @@ class AdminController extends Controller
         $res = [
             'rc'=>'0',
             'rd'=>'Cập nhật trạng thái thành công'
+        ];
+        return json_encode($res);
+    }
+    public function deleteUser(Request $request){
+        $data = $request->all();
+        $ip = IpConfig::where('user', '=', $data['userName'])->delete();
+        $user = User::where('name', '=', $data['userName'])->delete();
+        $res = [
+            'rc' => 0,
+            'rd' => 'Xoá tài khoản và dữ liệu đi kèm thành công.',
         ];
         return json_encode($res);
     }
@@ -140,7 +163,9 @@ class AdminController extends Controller
         $ipHost = IpConfig::where('user',$request->get('user'))->first();
         if($ipHost){
             $ipHost ->ip = $request->get('ip');
-            $ipHost->name = Auth::user()->phone;
+            $ipHost->name =  $request->get('user');
+            $ipHost->user =  $request->get('user');
+            $ipHost->status = 1;
             $ipHost->save();
             $res = [
                 'rc'=>'0',

@@ -31,12 +31,12 @@
                                 <td class="text-center">{{ user.updated_at }}</td>
                                 <td class="text-center">
                                     <el-button :disabled="user.role==1" v-if="user.status==1" size="mini" type="warning"
-                                               @click.prevent="updateStatus(user.id,0)">Chặn
+                                               @click.prevent="updateStatusUser(user.phone,0)">Chặn
                                     </el-button>
                                     <el-button :disabled="user.role==1"  v-else size="mini" type="success"
-                                               @click.prevent="updateStatus(user.id,1)">Duyệt
+                                               @click.prevent="updateStatusUser(user.phone,1)">Duyệt
                                     </el-button>
-                                    <el-button :disabled="user.role==1"  size="mini" type="danger" @click.prevent="confirmDel(user.id)">Xoá
+                                    <el-button :disabled="user.role==1"  size="mini" type="danger" @click.prevent="confirmDel(user.name)">Xoá
                                     </el-button>
                                 </td>
                             </tr>
@@ -98,17 +98,17 @@ export default {
         this.getIp()
     },
     methods: {
-        confirmDel(ip) {
-            this.$confirm('Xác nhận xoá địa chỉ ip này?', 'Thông báo', {
+        confirmDel(name) {
+            this.$confirm('Xác nhận xoá tài khoản này kèm theo các dữ liệu liên quan?', 'Thông báo', {
                 confirmButtonText: 'Đồng ý',
                 cancelButtonText: 'Hủy',
             })
                 .then(_ => {
                     let params = {
-                        ip: ip,
+                        userName: name,
                     }
                     console.log(params)
-                    var url = '/delete-ip'
+                    var url = '/delete-user'
                     this.loading.status = true;
                     this.loading.text = 'Loading...'
                     rest_api.post(url, params).then(
@@ -129,18 +129,18 @@ export default {
                 .catch(_ => {
                 });
         },
-        updateStatus(ip, status) {
+        updateStatusUser(userName, status) {
             this.$confirm('Xác nhận thay đổi trạng thái ip?', 'Thông báo', {
                 confirmButtonText: 'Đồng ý',
                 cancelButtonText: 'Hủy',
             })
                 .then(_ => {
                     let params = {
-                        ip: ip,
+                        userName: userName,
                         status: status
                     }
                     console.log(params)
-                    var url = '/update-ip'
+                    var url = '/update-status-user'
                     this.loading.status = true;
                     this.loading.text = 'Loading...'
                     rest_api.post(url, params).then(
