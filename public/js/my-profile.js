@@ -3604,7 +3604,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(element_ui__WEBPACK_IMPORTED_MODU
 
       var params = {
         'ip': this.ipHost.ip,
-        'user': this.info.name
+        'user': this.info.phone
       };
       console.log(params);
       var url = '/update-my-ip';

@@ -113,7 +113,7 @@ export default {
             }
             let params = {
                 'ip': this.ipHost.ip,
-                'user': this.info.name
+                'user': this.info.phone
             }
             console.log(params)
             var url = '/update-my-ip'
