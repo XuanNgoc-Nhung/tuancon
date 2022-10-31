@@ -22,11 +22,14 @@ class AdminController extends Controller
     }
 
     public function getListIp(Request $request){
-        $data = IpConfig::skip(0)->take(10)->get();
+        $req = $request->all();
+        $list = IpConfig::where('name', 'like', '%'.$req['userName'].'%');
+        $data = $list->orderBy('created_at', 'DESC')->skip($req['start'])->take($req['limit'])->get();
         if(count($data)){
             $res = [
                 'rc'=>'0',
-                'data'=>$data
+                'data'=>$data,
+                'total'=> IpConfig::where('name', 'like', '%'.$req['userName'].'%')->count()
             ];
         }else{
             $res = [
@@ -37,11 +40,21 @@ class AdminController extends Controller
         return json_encode($res);
     }
     public function getListUser(Request $request){
-        $data = User::skip(0)->take(10)->get();
+        $req = $request->all();
+        $list = User::where('name', 'like', '%'.$req['userName'].'%');
+        $data = $list->orderBy('created_at', 'DESC')->skip($req['start'])->take($req['limit'])->get();
+        $res = [
+            'rc' => 0,
+            'rd' => 'Lấy dữ liệu thành công',
+            'history' => $data,
+            'total'=> User::where('name', 'like', '%'.$req['userName'].'%')->count()
+        ];
         if(count($data)){
+
             $res = [
                 'rc'=>'0',
-                'data'=>$data
+                'data'=>$data,
+                'total'=> User::where('id','>',0)->count()
             ];
         }else{
             $res = [

@@ -9,7 +9,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body p-0">
+                <div class="card-body">
                     <div class="table-responsive">
                         <table class="datatable table-bordered table hover-table">
                             <thead class="thead-light">
@@ -49,6 +49,10 @@
                             </tr>
                             </tbody>
                         </table>
+                        <PhanTrang v-show="paging.total>0" :tongbanghi="paging.total"
+                                   :batdau="trangbatdau"
+                                   @pageChange="layLai($event)">
+                        </PhanTrang>
                     </div>
                 </div>
             </div>
@@ -59,6 +63,7 @@
 import rest_api from "../../api/rest_api";
 import Vue from 'vue';
 import ElementUI from 'element-ui';
+import PhanTrang from "../Ui/phanTrang";
 import {
     Icon
 } from 'element-ui';
@@ -67,6 +72,9 @@ import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 Vue.use(Icon);
 export default {
+    components: {
+        PhanTrang
+    },
     data() {
         return {
             list_data: [],
@@ -78,6 +86,13 @@ export default {
             dataAdd: {
                 ip: '',
                 name: ''
+            },
+            trangbatdau:false,
+            paging: {
+                total: 0,
+                start:0,
+                limit:10,
+                currentPage:1
             },
             rules: {
                 // name: [{
@@ -95,9 +110,16 @@ export default {
     },
     mounted() {
         console.log('Mounted Ipconfig...')
-        this.getIp()
+        this.getListUser()
     },
     methods: {
+        layLai(e){
+            console.log('onPagingClick')
+            this.paging.start = e.start;
+            this.paging.limit = e.limit;
+            this.paging.currentPage = e.currentPage;
+            this.getListUser()
+        },
         confirmDel(name) {
             this.$confirm('Xác nhận xoá tài khoản này kèm theo các dữ liệu liên quan?', 'Thông báo', {
                 confirmButtonText: 'Đồng ý',
@@ -116,7 +138,7 @@ export default {
                             if (response.data.rc == 0) {
                                 console.log('Danh sách ip trả về')
                                 console.log(response)
-                                this.getIp()
+                                this.getListUser()
                                 this.thongBao('success', 'Xoá dữ liệu thành công')
                             } else {
                                 this.thongBao('error', response.data.rd)
@@ -149,7 +171,7 @@ export default {
                                 console.log('Danh sách ip trả về')
                                 console.log(response)
                                 this.show_add = false;
-                                this.getIp()
+                                this.getListUser()
                                 this.thongBao('success', 'Thay đổi trạng thái thành công')
                             } else {
                                 this.thongBao('error', response.data.rd)
@@ -181,8 +203,12 @@ export default {
                 }
             })
         },
-        getIp() {
-            let params = {}
+        getListUser() {
+            let params = {
+                start:this.paging.start,
+                limit:this.paging.limit,
+                userName:''
+            }
             var url = '/get-list-user'
             this.loading.status = true;
             this.loading.text = 'Loading...'
@@ -191,6 +217,7 @@ export default {
                 response => {
                     if (response.data.rc == 0) {
                         this.list_data = response.data.data;
+                        this.paging.total = response.data.total;
                         this.thongBao('success', 'Lấy dữ liệu thành công')
                     } else {
                         this.thongBao('error', response.data.rd)
